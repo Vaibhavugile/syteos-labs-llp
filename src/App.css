@@ -1,0 +1,228 @@
+/*
+ * App.css — Stable WebGL + Multi-section Layout
+ * Hero + Services safe
+ */
+
+/* ======================================= */
+/* 1. GLOBAL RESET */
+/* ======================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: #031027;
+  color: #eaf2ff;
+}
+
+/* Global easing */
+:root {
+  --ease: cubic-bezier(.16,.84,.48,1);
+}
+
+/* ======================================= */
+/* 2. HERO SECTION (HARD-CONTAINED) */
+/* ======================================= */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  isolation: isolate;                 /* 🔑 stops WebGL bleed */
+  background: radial-gradient(
+    circle at 70% 30%,
+    #071229,
+    #031027 70%
+  );
+}
+
+/* HERO CONTENT WRAPPER */
+.hero-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  max-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  padding: 0 6vw;
+  overflow: hidden;                   /* 🔑 WebGL safety */
+}
+
+/* LEFT TEXT */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.6rem;
+  z-index: 2;
+}
+
+/* RIGHT 3D */
+.hero-right {
+  position: relative;
+  height: 100%;
+  overflow: hidden;                   /* 🔑 hard boundary */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* CANVAS — FULLY CONSTRAINED */
+.hero-right canvas {
+  position: absolute;
+  inset: 0;                           /* top/right/bottom/left = 0 */
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 520px;
+  margin-left: auto;
+  display: block;
+}
+
+/* ======================================= */
+/* 3. HERO TEXT ANIMATIONS */
+/* ======================================= */
+
+/* PILL */
+.pill {
+  width: fit-content;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(108,92,231,0.12),
+    rgba(0,212,255,0.08)
+  );
+  border: 1px solid rgba(255,255,255,0.04);
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+
+.pill.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* HEADLINE */
+.hero-left h1 {
+  font-size: clamp(3rem, 5vw, 4.6rem);
+  line-height: 1.1;
+  font-weight: 800;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+
+.hero-left h1.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-left h1 span {
+  background: linear-gradient(90deg, #6c5ce7, #00d4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* BODY TEXT */
+.hero-left p {
+  max-width: 520px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #99a6b6;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+
+.hero-left p.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* BUTTONS */
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+
+.hero-buttons.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ======================================= */
+/* 4. BUTTON STYLES */
+/* ======================================= */
+
+.btn-primary,
+.btn-secondary {
+  padding: 14px 26px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #6c5ce7, #00d4ff);
+  color: white;
+  border: none;
+  box-shadow: 0 12px 34px rgba(108,92,231,0.15);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(108,92,231,0.25);
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  color: #eaf2ff;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.035);
+  border-color: rgba(255,255,255,0.08);
+}
+
+/* ======================================= */
+/* 5. MOBILE */
+/* ======================================= */
+
+@media (max-width: 900px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    padding: 0 1.5rem;
+  }
+
+  .hero-right {
+    height: 420px;
+    justify-content: center;
+  }
+
+  .hero-right canvas {
+    position: relative;
+    max-width: 100%;
+  }
+}
