@@ -1,87 +1,112 @@
-// components/services/Services.jsx
-
-import { Canvas } from "@react-three/fiber"
-import { Suspense, useEffect, useRef, useState } from "react"
-import AvatarServices from "./AvatarServices"
-import ServiceStage from "./ServiceStage"
-import ServiceCard from "./ServiceCard"
+import { motion } from "framer-motion"
 import "./services.css"
 
 const SERVICES = [
-  { id: "web", title: "Web Development", phase: "point" },
-  { id: "app", title: "App Development", phase: "talk" },
-  { id: "uiux", title: "UI / UX Design", phase: "talk" },
-  { id: "marketing", title: "Digital Marketing", phase: "agree" },
-  { id: "cta", title: "Let’s Work Together", phase: "handshake" },
+  {
+    title: "Web Development",
+    subtitle: "Modern & scalable websites",
+    description:
+      "High-performance, SEO-friendly, and responsive web solutions.",
+    icon: "💻",
+  },
+  {
+    title: "App Development",
+    subtitle: "iOS & Android apps",
+    description:
+      "Native and cross-platform mobile applications built to scale.",
+    icon: "📱",
+  },
+  {
+    title: "UI / UX Design",
+    subtitle: "Human-centered design",
+    description:
+      "Clean, intuitive interfaces focused on usability and conversions.",
+    icon: "🎨",
+  },
+  {
+    title: "Digital Marketing",
+    subtitle: "Growth & visibility",
+    description:
+      "SEO, paid ads, and data-driven strategies that convert.",
+    icon: "📈",
+  },
+  {
+    title: "E-Commerce Solutions",
+    subtitle: "Sell at scale",
+    description:
+      "Secure, fast, and conversion-optimized online stores.",
+    icon: "🛒",
+  },
+  {
+    title: "Cloud & DevOps",
+    subtitle: "Reliable infrastructure",
+    description:
+      "Scalable cloud setups, CI/CD pipelines, and deployments.",
+    icon: "☁️",
+  },
+  {
+    title: "API Development",
+    subtitle: "Robust backend systems",
+    description:
+      "Secure, well-documented APIs for modern applications.",
+    icon: "🔗",
+  },
+  {
+    title: "Maintenance & Support",
+    subtitle: "Long-term reliability",
+    description:
+      "Ongoing updates, monitoring, and performance optimization.",
+    icon: "🛠️",
+  },
 ]
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: i => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.08,
+      duration: 0.6,
+      ease: [0.16, 0.84, 0.48, 1],
+    },
+  }),
+}
+
 export default function Services() {
-  const servicesRef = useRef(null)
-  const [showCanvas, setShowCanvas] = useState(false)
-
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [settled, setSettled] = useState([])
-
-  const activeService = SERVICES[activeIndex]
-
-  /* ----------------------------------
-     CANVAS VISIBILITY CONTROL
-  ---------------------------------- */
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setShowCanvas(entry.isIntersecting)
-      },
-      { threshold: 0.2 }
-    )
-
-    if (servicesRef.current) observer.observe(servicesRef.current)
-
-    return () => observer.disconnect()
-  }, [])
-
-  /* ----------------------------------
-     SERVICE PROGRESSION
-  ---------------------------------- */
-  const handleAvatarDone = () => {
-    setSettled(prev => [...prev, activeService])
-
-    setActiveIndex(i =>
-      i < SERVICES.length - 1 ? i + 1 : i
-    )
-  }
-
   return (
-    <section className="services-section" ref={servicesRef}>
-      {/* LEFT — SETTLED SERVICES */}
-      <div className="services-left">
-        {settled.map((service, index) => (
-          <ServiceCard
-            key={service.id}
-            title={service.title}
-            index={index}
-          />
-        ))}
-      </div>
+    <section className="services-2d">
+      <div className="services-container">
+        {/* HEADER */}
+        <div className="services-header">
+          <h2>
+            Our <span>Services</span>
+          </h2>
+          <p>
+            We design, build, and scale digital products with precision,
+            performance, and long-term vision.
+          </p>
+        </div>
 
-      {/* RIGHT — ACTIVE CANVAS */}
-      <div className="services-right">
-        {showCanvas && (
-          <Canvas camera={{ position: [0, 1.5, 4], fov: 35 }}>
-            <ambientLight intensity={0.7} />
-            <directionalLight position={[5, 5, 5]} intensity={1.2} />
-
-            <Suspense fallback={null}>
-              <AvatarServices
-                phase={activeService.phase}
-                onActionComplete={handleAvatarDone}
-              />
-
-              {/* Center animated service */}
-              <ServiceStage key={activeService.id} />
-            </Suspense>
-          </Canvas>
-        )}
+        {/* GRID */}
+        <div className="services-grid">
+          {SERVICES.map((service, i) => (
+            <motion.div
+              className="service-card-2d"
+              key={service.title}
+              custom={i}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="service-icon-2d">{service.icon}</div>
+              <h3>{service.title}</h3>
+              <span className="service-sub-2d">{service.subtitle}</span>
+              <p>{service.description}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   )

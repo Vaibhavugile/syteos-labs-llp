@@ -1,40 +1,231 @@
-/* components/services/services.css */
-
-.services-section {
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  background: radial-gradient(circle at 70% 30%, #071229, #031027 70%);
-  overflow: hidden;
-}
-
-.services-left {
+/* ======================================= */
+/* SERVICES — PREMIUM 2D + MOBILE FRIENDLY */
+/* ======================================= */
+.services-2d {
   position: relative;
-  padding: 120px 40px;
+  isolation: isolate; /* 🔑 CRITICAL */
+  z-index: 2;
 }
 
-.service-card {
-  position: absolute;
-  left: 0;
+.services-2d {
+  min-height: 100vh;
+  width: 100%;
+  background: radial-gradient(
+    circle at 70% 20%,
+    #071229,
+    #031027 70%
+  );
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 18px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #eaf2ff;
-  font-weight: 600;
-  backdrop-filter: blur(10px);
+  justify-content: center;
+  padding: 110px 6vw;
 }
 
-.service-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
+/* CONTAINER */
+.services-container {
+  max-width: 1300px;
+  width: 100%;
+}
+
+/* HEADER */
+.services-header {
+  max-width: 680px;
+  margin-bottom: 80px;
+}
+
+.services-header h2 {
+  font-size: clamp(2.8rem, 4vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 18px;
+}
+
+.services-header h2 span {
   background: linear-gradient(90deg, #6c5ce7, #00d4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.services-right {
+.services-header p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #9aa7bd;
+}
+
+/* GRID */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  perspective: 1200px;
+}
+
+/* CARD */
+.service-card-2d {
   position: relative;
+  padding: 36px 30px;
+  border-radius: 22px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transform-style: preserve-3d;
+  transition:
+    transform 0.45s cubic-bezier(.16,.84,.48,1),
+    box-shadow 0.45s cubic-bezier(.16,.84,.48,1),
+    border-color 0.45s;
+}
+
+/* LIGHT GLOSS */
+.service-card-2d::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at top left,
+    rgba(255, 255, 255, 0.14),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+
+/* HOVER (DESKTOP ONLY) */
+.service-card-2d:hover {
+  transform: translateY(-10px) rotateX(6deg) rotateY(-6deg);
+  border-color: rgba(108, 92, 231, 0.45);
+  box-shadow:
+    0 35px 90px rgba(108, 92, 231, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.service-card-2d:hover::before {
+  opacity: 1;
+}
+
+/* ICON */
+.service-icon-2d {
+  font-size: 36px;
+  margin-bottom: 18px;
+  transition: transform 0.4s ease;
+}
+
+.service-card-2d:hover .service-icon-2d {
+  transform: translateY(-4px) scale(1.05);
+}
+
+/* TITLE */
+.service-card-2d h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* SUBTITLE */
+.service-sub-2d {
+  display: block;
+  font-size: 0.92rem;
+  color: #9aa7bd;
+  margin-bottom: 14px;
+}
+
+/* DESCRIPTION */
+.service-card-2d p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #cfd8e6;
+}
+
+/* ======================================= */
+/* RESPONSIVE — TABLET */
+/* ======================================= */
+
+@media (max-width: 1200px) {
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ======================================= */
+/* RESPONSIVE — MOBILE (KEY CHANGES) */
+/* ======================================= */
+
+@media (max-width: 768px) {
+  /* Section padding */
+  .services-2d {
+    padding: 80px 1.25rem;
+  }
+
+  /* Center header */
+  .services-header {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 48px;
+  }
+
+  .services-header p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* 2x2 grid */
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  /* Card size tuning */
+  .service-card-2d {
+    padding: 20px 18px;
+    border-radius: 16px;
+  }
+
+  .service-icon-2d {
+    font-size: 26px;
+    margin-bottom: 10px;
+  }
+
+  .service-card-2d h3 {
+    font-size: 1.05rem;
+  }
+
+  .service-sub-2d {
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+  }
+
+  .service-card-2d p {
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+}
+
+/* ======================================= */
+/* TOUCH DEVICES — DISABLE HOVER 3D */
+/* ======================================= */
+
+@media (hover: none) {
+  .service-card-2d:hover {
+    transform: none;
+    box-shadow:
+      0 20px 50px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .service-card-2d:hover::before {
+    opacity: 0;
+  }
+
+  .service-card-2d:hover .service-icon-2d {
+    transform: none;
+  }
 }
