@@ -1,6 +1,5 @@
 /*
- * App.css — Stable WebGL + Multi-section Layout
- * Hero + Services safe
+ * App.css — STABLE LAYOUT (FINAL)
  */
 
 /* ======================================= */
@@ -23,6 +22,7 @@ body {
   font-family: "Inter", system-ui, sans-serif;
   background: #031027;
   color: #eaf2ff;
+  display: block; /* 🔑 MUST BE BLOCK */
 }
 
 /* Global easing */
@@ -31,7 +31,18 @@ body {
 }
 
 /* ======================================= */
-/* 2. HERO SECTION (HARD-CONTAINED) */
+/* 2. SECTION SHELL (GLOBAL WRAPPER) */
+/* ======================================= */
+
+.section-shell {
+  position: relative;
+  width: 100%;
+  display: block;          /* 🔑 REQUIRED */
+  overflow: visible;
+}
+
+/* ======================================= */
+/* 3. HERO SECTION (HARD-CONTAINED) */
 /* ======================================= */
 
 .hero {
@@ -39,7 +50,7 @@ body {
   width: 100%;
   height: 100vh;
   min-height: 100vh;
-  isolation: isolate;                 /* 🔑 stops WebGL bleed */
+  isolation: isolate;      /* 🔑 REQUIRED FOR WEBGL */
   background: radial-gradient(
     circle at 70% 30%,
     #071229,
@@ -57,7 +68,7 @@ body {
   grid-template-columns: 1.1fr 1fr;
   align-items: center;
   padding: 0 6vw;
-  overflow: hidden;                   /* 🔑 WebGL safety */
+  overflow-x: hidden;
 }
 
 /* LEFT TEXT */
@@ -66,35 +77,34 @@ body {
   flex-direction: column;
   justify-content: center;
   gap: 1.6rem;
-  z-index: 2;
+  z-index: 2; /* text above canvas */
 }
 
 /* RIGHT 3D */
 .hero-right {
   position: relative;
   height: 100%;
-  overflow: hidden;                   /* 🔑 hard boundary */
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
 
-/* CANVAS — FULLY CONSTRAINED */
+/* CANVAS — SCOPED ONLY TO HERO */
 .hero-right canvas {
   position: absolute;
-  inset: 0;                           /* top/right/bottom/left = 0 */
+  inset: 0;
   width: 100% !important;
   height: 100% !important;
   max-width: 520px;
   margin-left: auto;
   display: block;
+  pointer-events: none; /* 🔑 PREVENT BLOCKING */
 }
 
 /* ======================================= */
-/* 3. HERO TEXT ANIMATIONS */
+/* 4. HERO TEXT ANIMATIONS */
 /* ======================================= */
 
-/* PILL */
 .pill {
   width: fit-content;
   padding: 6px 14px;
@@ -117,7 +127,6 @@ body {
   transform: translateY(0);
 }
 
-/* HEADLINE */
 .hero-left h1 {
   font-size: clamp(3rem, 5vw, 4.6rem);
   line-height: 1.1;
@@ -138,7 +147,6 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* BODY TEXT */
 .hero-left p {
   max-width: 520px;
   font-size: 1.05rem;
@@ -154,7 +162,6 @@ body {
   transform: translateY(0);
 }
 
-/* BUTTONS */
 .hero-buttons {
   display: flex;
   gap: 1rem;
@@ -170,7 +177,7 @@ body {
 }
 
 /* ======================================= */
-/* 4. BUTTON STYLES */
+/* 5. BUTTONS */
 /* ======================================= */
 
 .btn-primary,
@@ -207,7 +214,7 @@ body {
 }
 
 /* ======================================= */
-/* 5. MOBILE */
+/* 6. MOBILE */
 /* ======================================= */
 
 @media (max-width: 900px) {

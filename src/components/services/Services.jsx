@@ -61,7 +61,7 @@ const SERVICES = [
 ]
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 30 },
   visible: i => ({
     opacity: 1,
     y: 0,
@@ -92,13 +92,12 @@ export default function Services() {
         <div className="services-grid">
           {SERVICES.map((service, i) => (
             <motion.div
-              className="service-card-2d"
               key={service.title}
+              className="service-card-2d"
               custom={i}
               variants={cardVariants}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              animate="visible"   
             >
               <div className="service-icon-2d">{service.icon}</div>
               <h3>{service.title}</h3>

@@ -7,9 +7,17 @@ import "./App.css"
 export default function App() {
   return (
     <>
-      <Hero />
-      <Services />
-      <ProjectsShowcase />
+      <div className="section-shell">
+    <Hero />
+  </div>
+<div className="section-shell">
+    <ProjectsShowcase />
+  </div>
+  <div className="section-shell">
+    <Services />
+  </div>
+
+  
     </> 
   )
 }
