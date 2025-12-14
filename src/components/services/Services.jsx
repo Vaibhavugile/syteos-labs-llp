@@ -97,7 +97,8 @@ export default function Services() {
               custom={i}
               variants={cardVariants}
               initial="hidden"
-              animate="visible"   
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.25 }}
             >
               <div className="service-icon-2d">{service.icon}</div>
               <h3>{service.title}</h3>

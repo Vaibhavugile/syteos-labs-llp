@@ -1,64 +1,100 @@
 import { useGLTF, useFBX, useAnimations } from "@react-three/drei"
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useMemo, useRef } from "react"
 import * as THREE from "three"
+import { SkeletonUtils } from "three-stdlib"
 
-// Wrap the component in React.memo to prevent re-rendering when parent state changes 
-// (e.g., text states) that don't affect the 'phase' prop.
+/* ----------------------------------
+   Remove animation tracks that
+   don't exist on the avatar
+---------------------------------- */
+function cleanClip(clip, root) {
+  clip.tracks = clip.tracks.filter(track => {
+    const boneName = track.name.split(".")[0]
+    return root.getObjectByName(boneName)
+  })
+  return clip
+}
+
 const Avatar = React.memo(({ phase }) => {
   const group = useRef()
 
-  const { scene } = useGLTF("/models/646d9dcdc8a5f5bddbfac913.glb")
+  /* ----------------------------------
+     LOAD & CLONE AVATAR (CRITICAL)
+  ---------------------------------- */
+  const gltf = useGLTF("/models/avatornew.glb")
 
-  const bow = useFBX("/animations/Quick Informal Bow.fbx")
-  const point = useFBX("/animations/Pointing.fbx") 
-  const idle = useFBX("/animations/Happy Idle.fbx")
+  const scene = useMemo(() => {
+    return SkeletonUtils.clone(gltf.scene)
+  }, [gltf.scene])
 
-  bow.animations[0].name = "bow"
-  point.animations[0].name = "point"
-  idle.animations[0].name = "idle"
+  /* ----------------------------------
+     LOAD ANIMATIONS
+  ---------------------------------- */
+  const waveFBX = useFBX("/animationsn/Waving new.fbx")
+  const pointFBX = useFBX("/animationsn/Pointing.fbx")
+  const idleFBX = useFBX("/animationsn/Breathing Idle.fbx")
+
+  const waveClip = cleanClip(waveFBX.animations[0], scene)
+  const pointClip = cleanClip(pointFBX.animations[0], scene)
+  const idleClip = cleanClip(idleFBX.animations[0], scene)
+
+  waveClip.name = "wave"
+  pointClip.name = "point"
+  idleClip.name = "idle"
 
   const { actions } = useAnimations(
-    [bow.animations[0], point.animations[0], idle.animations[0]],
+    [waveClip, pointClip, idleClip],
     group
   )
 
+  /* ----------------------------------
+     PREMIUM SMOOTH BLENDING LOGIC
+  ---------------------------------- */
   useEffect(() => {
-    if (!actions) return
+    if (!actions || !actions[phase]) return
 
-    // CRITICAL: Stop the *previous* action and start the *new* one. 
-    // We use a small fade to smooth the transition and prevent visual jumps.
-    
-    // Find the previous action and fade it out
-    const previousPhase = Object.keys(actions).find(name => actions[name].weight > 0);
-    if (previousPhase && actions[previousPhase]) {
-        actions[previousPhase].fadeOut(0.2);
-    }
-    
-    const action = actions[phase]
-    if (!action) return
+    const next = actions[phase]
 
-    action.reset()
-    action.setEffectiveTimeScale(1)
-    action.setEffectiveWeight(1)
+    // Find currently running animation
+    const current = Object.values(actions).find(
+      action => action.isRunning() && action !== next
+    )
 
-    // Set 'idle' and 'point' to loop
+    next.enabled = true
+    next.setEffectiveTimeScale(1)
+    next.setEffectiveWeight(1)
+
+    // Loop rules
     if (phase === "idle" || phase === "point") {
-      action.setLoop(THREE.LoopRepeat, Infinity)
+      next.setLoop(THREE.LoopRepeat, Infinity)
     } else {
-      action.setLoop(THREE.LoopOnce, 1)
+      next.setLoop(THREE.LoopOnce, 1)
     }
 
-    action.clampWhenFinished = false
-    action.fadeIn(0.2); // Fade in the new action
-    action.play()
+    // Keep last pose when finished
+    next.clampWhenFinished = true
 
-  }, [phase, actions]) // Only run when phase or actions array changes
+    if (current) {
+      // 🔥 TRUE CROSSFADE (NO SNAP)
+      next.reset()
+      next.crossFadeFrom(current, 0.6, true)
+      next.play()
+    } else {
+      // First animation
+      next.reset().fadeIn(0.6).play()
+    }
+
+  }, [phase, actions])
 
   return (
-    <group ref={group} position={[0, -1.5, 0]} scale={1.25}>
+    <group
+      ref={group}
+      position={[0, -1.5, 0]}
+      scale={1.25}
+    >
       <primitive object={scene} />
     </group>
   )
 })
 
-export default Avatar;
+export default Avatar

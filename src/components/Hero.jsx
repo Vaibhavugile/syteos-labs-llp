@@ -3,7 +3,7 @@ import { Suspense, useEffect, useState, useRef } from "react"
 import Avatar from "./Avatar"
 
 export default function Hero() {
-  const [phase, setPhase] = useState("bow")
+  const [phase, setPhase] = useState("wave")
 
   // Text reveal states
   const [showPill, setShowPill] = useState(false)
@@ -16,39 +16,39 @@ export default function Hero() {
   const [showCanvas, setShowCanvas] = useState(true)
 
   /* ----------------------------------
-     HERO ANIMATION TIMELINE (UNCHANGED)
+     HERO TIMELINE (FIXED)
   ---------------------------------- */
   useEffect(() => {
-    const startAnimation = 2200
+    const waveDuration = 3800 // 👈 ensures wave is clearly visible
     const initialTextDelay = 500
     const staggerInterval = 350
 
-    const bowTimer = setTimeout(() => {
+    const waveTimer = setTimeout(() => {
       setPhase("point")
-    }, 2200)
+    }, waveDuration)
 
     const pillTimer = setTimeout(() => {
       setShowPill(true)
-    }, startAnimation + initialTextDelay)
+    }, waveDuration + initialTextDelay)
 
     const headlineTimer = setTimeout(() => {
       setShowHeadline(true)
-    }, startAnimation + initialTextDelay + staggerInterval)
+    }, waveDuration + initialTextDelay + staggerInterval)
 
     const bodyTimer = setTimeout(() => {
       setShowBody(true)
-    }, startAnimation + initialTextDelay + staggerInterval * 2)
+    }, waveDuration + initialTextDelay + staggerInterval * 2)
 
     const buttonsTimer = setTimeout(() => {
       setShowButtons(true)
-    }, startAnimation + initialTextDelay + staggerInterval * 3)
+    }, waveDuration + initialTextDelay + staggerInterval * 3)
 
     const idleTimer = setTimeout(() => {
       setPhase("idle")
-    }, 6700)
+    }, waveDuration + 3500)
 
     return () => {
-      clearTimeout(bowTimer)
+      clearTimeout(waveTimer)
       clearTimeout(pillTimer)
       clearTimeout(headlineTimer)
       clearTimeout(bodyTimer)
@@ -69,7 +69,6 @@ export default function Hero() {
     )
 
     if (heroRef.current) observer.observe(heroRef.current)
-
     return () => observer.disconnect()
   }, [])
 
