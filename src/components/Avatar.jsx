@@ -32,7 +32,7 @@ const Avatar = React.memo(({ phase }) => {
   ---------------------------------- */
   const waveFBX = useFBX("/animationsn/Waving new.fbx")
   const pointFBX = useFBX("/animationsn/Pointing.fbx")
-  const idleFBX = useFBX("/animationsn/Breathing Idle.fbx")
+  const idleFBX = useFBX("/animationsn/Talking.fbx")
 
   const waveClip = cleanClip(waveFBX.animations[0], scene)
   const pointClip = cleanClip(pointFBX.animations[0], scene)
