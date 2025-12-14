@@ -2,7 +2,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import "./header.css"
 
-export default function Header() {
+export default function Header({ theme, toggleTheme }) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -23,6 +23,15 @@ export default function Header() {
             <a href="#contact" className="cta">
               Start Project
             </a>
+
+            {/* THEME TOGGLE */}
+            <button
+              className="theme-toggle"
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? "🌙" : "☀️"}
+            </button>
           </nav>
 
           {/* MOBILE TOGGLE */}
@@ -54,6 +63,17 @@ export default function Header() {
             <a onClick={() => setOpen(false)} href="#contact" className="cta">
               Start Project
             </a>
+
+            {/* MOBILE THEME TOGGLE */}
+            <button
+              className="theme-toggle mobile"
+              onClick={() => {
+                toggleTheme()
+                setOpen(false)
+              }}
+            >
+              {theme === "dark" ? "Switch to Light ☀️" : "Switch to Dark 🌙"}
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
