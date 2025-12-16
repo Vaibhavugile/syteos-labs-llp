@@ -9,6 +9,7 @@ import ContactUs from "./components/ContactSection"
 import TeamSection from "./components/TeamSection"
 import ProcessSection from "./components/ProcessSection"
 import "./App.css"
+import "./components/avatarPreload"
 
 export default function App() {
   const [theme, setTheme] = useState("dark")
