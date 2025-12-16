@@ -230,3 +230,8 @@
   }
 
 }
+.services-title span {
+  background: linear-gradient(90deg, #6c5ce7, #00d4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

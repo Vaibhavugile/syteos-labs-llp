@@ -2,8 +2,10 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import "./header.css"
 
-export default function Header({ theme, toggleTheme }) {
+export default function Header() {
   const [open, setOpen] = useState(false)
+
+  const closeMenu = () => setOpen(false)
 
   return (
     <>
@@ -12,26 +14,21 @@ export default function Header({ theme, toggleTheme }) {
 
           {/* LOGO */}
           <div className="logo">
-            <span>My</span>Studio
+            <span>SYTEOS</span> LABS 
           </div>
 
           {/* DESKTOP NAV */}
           <nav className="nav-desktop">
             <a href="#services">Services</a>
+            <a href="#process">Process</a>
             <a href="#projects">Projects</a>
             <a href="#testimonials">Testimonials</a>
+            <a href="#team">Team</a>
+
+            {/* CTA → CONTACT */}
             <a href="#contact" className="cta">
               Start Project
             </a>
-
-            {/* THEME TOGGLE */}
-            <button
-              className="theme-toggle"
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? "🌙" : "☀️"}
-            </button>
           </nav>
 
           {/* MOBILE TOGGLE */}
@@ -44,6 +41,7 @@ export default function Header({ theme, toggleTheme }) {
             <span />
             <span />
           </button>
+
         </div>
       </header>
 
@@ -57,23 +55,20 @@ export default function Header({ theme, toggleTheme }) {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.35, ease: [0.16, 0.84, 0.48, 1] }}
           >
-            <a onClick={() => setOpen(false)} href="#services">Services</a>
-            <a onClick={() => setOpen(false)} href="#projects">Projects</a>
-            <a onClick={() => setOpen(false)} href="#testimonials">Testimonials</a>
-            <a onClick={() => setOpen(false)} href="#contact" className="cta">
+            <a href="#services" onClick={closeMenu}>Services</a>
+            <a href="#process" onClick={closeMenu}>Process</a>
+            <a href="#projects" onClick={closeMenu}>Projects</a>
+            <a href="#testimonials" onClick={closeMenu}>Testimonials</a>
+            <a href="#team" onClick={closeMenu}>Team</a>
+
+            {/* CTA */}
+            <a
+              href="#contact"
+              className="cta"
+              onClick={closeMenu}
+            >
               Start Project
             </a>
-
-            {/* MOBILE THEME TOGGLE */}
-            <button
-              className="theme-toggle mobile"
-              onClick={() => {
-                toggleTheme()
-                setOpen(false)
-              }}
-            >
-              {theme === "dark" ? "Switch to Light ☀️" : "Switch to Dark 🌙"}
-            </button>
           </motion.div>
         )}
       </AnimatePresence>

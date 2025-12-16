@@ -65,7 +65,7 @@ const PROJECTS = [
 
 export default function ProjectsShowcase() {
   return (
-    <section className="projects-showcase">
+    <section className="projects-showcase" id="projects">
       <div className="projects-header">
         <h2>
           Our <span>Projects</span>

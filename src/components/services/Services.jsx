@@ -1,5 +1,6 @@
 import { Canvas } from "@react-three/fiber"
 import { Suspense, useState } from "react"
+import { Html } from "@react-three/drei"
 import AvatarTyping from "../AvatarTyping"
 import "./services.css"
 
@@ -8,7 +9,11 @@ const ICONS = {
   web: (
     <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
       <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" stroke="currentColor" strokeWidth="1.5" />
+      <path
+        d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
     </svg>
   ),
   app: (
@@ -35,7 +40,11 @@ const ICONS = {
   ),
   cloud: (
     <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
-      <path d="M7 18h10a4 4 0 0 0 0-8 6 6 0 0 0-11-2" stroke="currentColor" strokeWidth="1.5" />
+      <path
+        d="M7 18h10a4 4 0 0 0 0-8 6 6 0 0 0-11-2"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
     </svg>
   ),
 }
@@ -57,7 +66,10 @@ export default function Services() {
 
   return (
     <section className="services" id="services">
-      <h2 className="services-title">Our Services</h2>
+
+      <h2 className="services-title">
+        Our <span>Services</span>
+      </h2>
 
       <div className="services-container">
         <div className="services-layout">
@@ -78,37 +90,37 @@ export default function Services() {
 
           {/* CENTER */}
           <div className="center-area">
+
+            {/* AVATAR — ALWAYS MOUNTED */}
             <div className="avatar-wrap">
-            <Canvas camera={{ position: [0, 1.35, 3.6], fov: 35 }}>
+              <Canvas camera={{ position: [0, 1.35, 3.6], fov: 35 }}>
 
                 <ambientLight intensity={0.9} />
 
-                <directionalLight
-                  position={[5, 6, 5]}
-                  intensity={1.2}
-                />
+                <directionalLight position={[5, 6, 5]} intensity={1.2} />
+                <directionalLight position={[-4, 3, 2]} intensity={0.4} />
+                <directionalLight position={[0, 5, -6]} intensity={0.3} />
 
-                <directionalLight
-                  position={[-4, 3, 2]}
-                  intensity={0.4}
-                />
-
-                <directionalLight
-                  position={[0, 5, -6]}
-                  intensity={0.3}
-                />
-
-                <Suspense fallback={null}>
+                <Suspense
+                  fallback={
+                    <Html center>
+                      <div className="avatar-placeholder" />
+                    </Html>
+                  }
+                >
                   <AvatarTyping />
                 </Suspense>
+
               </Canvas>
             </div>
 
-            <div key={active} className="active-card">
+            {/* SERVICE CARD */}
+            <div className="active-card" key={active}>
               <div className="icon">{SERVICES[active].icon}</div>
               <h3>{SERVICES[active].title}</h3>
               <p>{SERVICES[active].desc}</p>
             </div>
+
           </div>
 
           {/* RIGHT */}

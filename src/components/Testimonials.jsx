@@ -31,7 +31,7 @@ export default function Testimonials() {
   const [paused, setPaused] = useState(false);
 
   return (
-    <section className="testimonials">
+    <section className="testimonials"  id="testimonials">
       <div className="testimonials-wrapper">
 
         {/* HEADER */}

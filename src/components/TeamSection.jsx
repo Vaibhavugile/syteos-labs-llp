@@ -10,7 +10,7 @@ const team = [
 
 export default function TeamSection() {
   return (
-    <section className="team">
+    <section className="team"  id="team">
       <div className="team-wrapper">
 
         {/* HEADER */}

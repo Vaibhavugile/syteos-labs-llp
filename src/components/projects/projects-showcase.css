@@ -18,7 +18,8 @@
 /* HEADER */
 .projects-header {
   max-width: 680px;
-  margin-bottom: 60px;
+  margin: 0 auto 60px; /* 🔥 center horizontally */
+  text-align: center; /* 🔥 center text */
 }
 
 .projects-header h2 {

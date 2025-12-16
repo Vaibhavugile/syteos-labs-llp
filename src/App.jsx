@@ -1,63 +1,58 @@
 // src/App.jsx
-import { useEffect, useState } from "react"
+
 import Hero from "./components/Hero"
 import Services from "./components/services/Services"
+import ProcessSection from "./components/ProcessSection"
 import ProjectsShowcase from "./components/projects/ProjectsShowcase"
 import Testimonials from "./components/Testimonials"
-import Header from "./components/Header"
-import ContactUs from "./components/ContactSection"
 import TeamSection from "./components/TeamSection"
-import ProcessSection from "./components/ProcessSection"
+import ContactUs from "./components/ContactSection"
+import Header from "./components/Header"
+
 import "./App.css"
-import "./components/avatarPreload"
-
+import "./components/avatarPreload" // 🔥 keep avatar preload
+import Footer from "./components/Footer"
 export default function App() {
-  const [theme, setTheme] = useState("dark")
-
-  // Load saved theme
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme")
-    if (savedTheme) {
-      setTheme(savedTheme)
-      document.documentElement.setAttribute("data-theme", savedTheme)
-    } else {
-      document.documentElement.setAttribute("data-theme", "dark")
-    }
-  }, [])
-
-  // Apply theme
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme)
-    localStorage.setItem("theme", theme)
-  }, [theme])
-
-  const toggleTheme = () => {
-    setTheme(prev => (prev === "dark" ? "light" : "dark"))
-  }
-
   return (
     <>
-      <Header theme={theme} toggleTheme={toggleTheme} />
+      {/* ================= HEADER ================= */}
+      <Header />
 
-      <div className="section-shell">
+      {/* ================= HERO ================= */}
+      <section className="section-shell">
         <Hero />
-      </div>
+      </section>
+       <section className="section-shell">
+        <ProcessSection />
+      </section>
 
-      <div className="section-shell">
+      {/* ================= SERVICES ================= */}
+      <section className="section-shell">
         <Services />
-      </div>
+      </section>
 
-      <div className="section-shell">
+      {/* ================= PROCESS ================= */}
+     
+
+      {/* ================= PROJECTS ================= */}
+      <section className="section-shell">
         <ProjectsShowcase />
-      </div>
+      </section>
 
-      <div className="section-shell">
+      {/* ================= TESTIMONIALS ================= */}
+      <section className="section-shell">
         <Testimonials />
-      </div>
+      </section>
 
+      {/* ================= TEAM ================= */}
+      <section className="section-shell">
+        <TeamSection />
+      </section>
+
+      {/* ================= CONTACT ================= */}
       <ContactUs />
-      <TeamSection />
-      <ProcessSection />
+
+      <Footer />
     </>
   )
 }

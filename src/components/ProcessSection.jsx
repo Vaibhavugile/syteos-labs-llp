@@ -30,7 +30,7 @@ const steps = [
 
 export default function ProcessSection() {
   return (
-    <section className="process">
+    <section className="process"  id="process">
       <div className="process-wrapper">
 
         {/* HEADER */}
