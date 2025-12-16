@@ -10,8 +10,9 @@ function cleanClip(clip, root) {
   return clip
 }
 
-export default function Avatar() {
+export default function Avatar({ onReady }) {
   const group = useRef()
+  const readyRef = useRef(false)
 
   const gltf = useGLTF("/models/avatornew.glb")
   const scene = useMemo(
@@ -19,22 +20,38 @@ export default function Avatar() {
     [gltf.scene]
   )
 
-  const idleFBX = useFBX("/animationsn/Talking.fbx")
+  const idleFBX = useFBX("/animationsn/Breathing Idle.fbx")
   const idleClip = useMemo(() => {
-    const clip = idleFBX.animations[0]
+    if (!idleFBX.animations.length) return null
+    const clip = idleFBX.animations[0].clone()
     clip.name = "idle"
     return cleanClip(clip, scene)
-  }, [idleFBX, scene])
+  }, [idleFBX.animations, scene])
 
-  const { actions } = useAnimations([idleClip], group)
+  const { actions } = useAnimations(
+    idleClip ? [idleClip] : [],
+    group
+  )
 
   useEffect(() => {
-    if (!actions?.idle) return
-    actions.idle.reset()
-    actions.idle.setLoop(THREE.LoopRepeat, Infinity)
-    actions.idle.fadeIn(0.5)
-    actions.idle.play()
-  }, [actions])
+    if (!actions?.idle || readyRef.current) return
+
+    const action = actions.idle
+    action.reset()
+    action.setLoop(THREE.LoopRepeat, Infinity)
+    action.fadeIn(0.4)
+    action.play()
+
+    // ✅ MARK READY IMMEDIATELY (NO RAF)
+    readyRef.current = true
+    onReady?.()
+
+    return () => {
+      if (action.isRunning()) action.stop()
+    }
+  }, [actions, onReady])
+
+  if (!idleClip) return null
 
   return (
     <group ref={group} position={[0, -1.5, 0]} scale={1.25}>
@@ -42,3 +59,7 @@ export default function Avatar() {
     </group>
   )
 }
+
+/* PRELOAD */
+useGLTF.preload("/models/avatornew.glb")
+useFBX.preload("/animationsn/Talking.fbx")

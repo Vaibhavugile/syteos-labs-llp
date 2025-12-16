@@ -1,5 +1,5 @@
 /*
- * App.css — PREMIUM LAYOUT (DARK + APPLE LIGHT)
+ * App.css — PREMIUM DARK / LIGHT UI + TEXT & AVATAR ANIMATIONS
  */
 
 /* ======================================= */
@@ -25,7 +25,7 @@ body {
 :root {
   --ease: cubic-bezier(.16,.84,.48,1);
 
-  /* ---------- DARK (DEFAULT) ---------- */
+  /* DARK */
   --bg-main: #031027;
   --bg-hero: radial-gradient(circle at 70% 30%, #071229, #031027 70%);
   --text-main: #eaf2ff;
@@ -33,23 +33,19 @@ body {
 
   --pill-bg: linear-gradient(
     90deg,
-    rgba(108,92,231,0.12),
-    rgba(0,212,255,0.08)
+    rgba(108,92,231,0.14),
+    rgba(0,212,255,0.12)
   );
 
   --btn-primary-bg: linear-gradient(90deg, #6c5ce7, #00d4ff);
-  --btn-primary-shadow: rgba(108,92,231,0.25);
+  --btn-primary-shadow: rgba(108,92,231,0.35);
 }
 
-/* ---------- LIGHT (APPLE STYLE) ---------- */
+/* LIGHT MODE */
 [data-theme="light"] {
   --bg-main: #f4f6f9;
   --bg-hero:
-    radial-gradient(
-      circle at 75% 35%,
-      #ffffff,
-      #edf1f7 65%
-    );
+    radial-gradient(circle at 75% 35%, #ffffff, #edf1f7 65%);
 
   --text-main: #0b1220;
   --text-muted: #5a6372;
@@ -61,124 +57,75 @@ body {
   );
 
   --btn-primary-bg: linear-gradient(90deg, #6c5ce7, #00b4ff);
-  --btn-primary-shadow: rgba(108,92,231,0.22);
+  --btn-primary-shadow: rgba(108,92,231,0.25);
 }
 
 /* ======================================= */
-/* 3. GLOBAL BODY */
+/* 3. BODY */
 /* ======================================= */
 
 body {
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
   background: var(--bg-main);
   color: var(--text-main);
-  display: block;
-  transition:
-    background 0.45s var(--ease),
-    color 0.45s var(--ease);
+  transition: background 0.45s var(--ease), color 0.45s var(--ease);
 }
 
 /* ======================================= */
-/* 4. SECTION SHELL */
-/* ======================================= */
-
-.section-shell {
-  position: relative;
-  width: 100%;
-  display: block;
-  overflow: visible;
-}
-
-/* ======================================= */
-/* 5. HERO SECTION */
+/* 4. HERO SECTION */
 /* ======================================= */
 
 .hero {
   padding-top: 90px;
-  position: relative;
-  width: 100%;
   height: 100vh;
   min-height: 100vh;
-  isolation: isolate;
   background: var(--bg-hero);
-}
-
-/* subtle light-mode depth */
-[data-theme="light"] .hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(
-      circle at 80% 50%,
-      rgba(108,92,231,0.08),
-      transparent 55%
-    );
-  pointer-events: none;
+  position: relative;
+  isolation: isolate;
 }
 
 .hero-container {
-  position: relative;
   height: 100%;
-  width: 100%;
-  max-height: 100vh;
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   align-items: center;
   padding: 0 6vw;
-  overflow: hidden;
 }
 
-/* LEFT TEXT */
+/* ======================================= */
+/* 5. HERO LEFT (TEXT) */
+/* ======================================= */
+
 .hero-left {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 1.6rem;
   z-index: 2;
 }
 
-/* RIGHT AVATAR */
-.hero-right {
-  position: relative;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+.hero-left > * {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: transform, opacity;
+  transition:
+    opacity 0.8s var(--ease),
+    transform 0.8s var(--ease);
 }
 
-/* Avatar grounding shadow */
-[data-theme="light"] .hero-right::after {
-  content: "";
-  position: absolute;
-  bottom: 8%;
-  left: 50%;
-  width: 260px;
-  height: 60px;
-  background: radial-gradient(
-    ellipse,
-    rgba(0,0,0,0.18),
-    transparent 70%
-  );
-  transform: translateX(-50%);
-  filter: blur(14px);
-  z-index: 0;
-}
+/* STAGGER */
+.hero-left .pill { transition-delay: 0.1s; }
+.hero-left h1 { transition-delay: 0.25s; }
+.hero-left p { transition-delay: 0.4s; }
+.hero-buttons { transition-delay: 0.55s; }
 
-/* CANVAS */
-.hero-right canvas {
-  position: absolute;
-  inset: 0;
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 520px;
-  margin-left: auto;
-  pointer-events: none;
-  z-index: 1;
+/* TEXT TRIGGER */
+.hero.animate .hero-left > * {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ======================================= */
-/* 6. HERO TEXT */
+/* 6. HERO TEXT STYLES */
 /* ======================================= */
 
 .pill {
@@ -186,41 +133,29 @@ body {
   padding: 6px 14px;
   border-radius: 999px;
   background: var(--pill-bg);
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.15);
   font-size: 0.85rem;
   font-weight: 600;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
-}
-
-[data-theme="light"] .pill {
-  border-color: rgba(0,0,0,0.06);
-}
-
-.pill.show {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .hero-left h1 {
   font-size: clamp(3rem, 5vw, 4.6rem);
-  line-height: 1.1;
   font-weight: 800;
-  opacity: 0;
-  transform: translateY(15px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-}
-
-.hero-left h1.show {
-  opacity: 1;
-  transform: translateY(0);
+  line-height: 1.1;
 }
 
 .hero-left h1 span {
   background: linear-gradient(90deg, #6c5ce7, #00d4ff);
+  background-size: 200% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: gradientShift 6s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .hero-left p {
@@ -228,33 +163,16 @@ body {
   font-size: 1.05rem;
   line-height: 1.6;
   color: var(--text-muted);
-  opacity: 0;
-  transform: translateY(15px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-}
-
-.hero-left p.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.hero-buttons {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-  opacity: 0;
-  transform: translateY(15px);
-  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
-}
-
-.hero-buttons.show {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* ======================================= */
 /* 7. BUTTONS */
 /* ======================================= */
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+}
 
 .btn-primary,
 .btn-secondary {
@@ -269,36 +187,58 @@ body {
   background: var(--btn-primary-bg);
   color: white;
   border: none;
-  box-shadow:
-    0 12px 34px var(--btn-primary-shadow),
-    inset 0 1px 0 rgba(255,255,255,0.5);
+  box-shadow: 0 12px 34px var(--btn-primary-shadow);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 18px 44px var(--btn-primary-shadow),
-    inset 0 1px 0 rgba(255,255,255,0.6);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 18px 44px var(--btn-primary-shadow);
 }
 
 .btn-secondary {
   background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.15);
   color: var(--text-main);
 }
 
-[data-theme="light"] .btn-secondary {
-  background: rgba(255,255,255,0.9);
-  border-color: rgba(0,0,0,0.08);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-}
-
 .btn-secondary:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.02);
 }
 
 /* ======================================= */
-/* 8. MOBILE */
+/* 8. HERO RIGHT (AVATAR LOAD ANIMATION) */
+/* ======================================= */
+
+.hero-right {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  /* HIDDEN UNTIL READY */
+  opacity: 0;
+  transform: translateY(28px) scale(0.96);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+}
+
+/* SHOWN ONLY WHEN AVATAR READY */
+.hero-right.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.hero-right canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 520px;
+  pointer-events: none;
+}
+
+/* ======================================= */
+/* 9. MOBILE */
 /* ======================================= */
 
 @media (max-width: 900px) {
@@ -313,7 +253,6 @@ body {
   }
 
   .hero-right canvas {
-    position: relative;
     max-width: 100%;
   }
 }
