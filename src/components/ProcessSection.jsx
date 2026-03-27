@@ -7,25 +7,25 @@ const steps = [
     step: "01",
     title: "Discover",
     desc: "We understand your goals, users, and constraints.",
-    img: "/process/discover.png",
+    img: "/process/discover.webp",
   },
   {
     step: "02",
     title: "Design",
     desc: "We craft intuitive, user-focused interfaces.",
-    img: "/process/design.png",
+    img: "/process/design.webp",
   },
   {
     step: "03",
     title: "Build",
     desc: "We develop scalable, high-performance solutions.",
-    img: "/process/build.png",
+    img: "/process/build.webp",
   },
   {
     step: "04",
     title: "Launch",
     desc: "We deploy, monitor, and support your product.",
-    img: "/process/launch.png",
+    img: "/process/launch.webp",
   },
 ]
 

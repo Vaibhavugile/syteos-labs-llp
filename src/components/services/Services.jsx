@@ -5,32 +5,32 @@ const SERVICES = [
   {
     title: "Web Development",
     desc: "High-performance websites built for speed, scale, and reliability.",
-    img: "/services/web1.png",
+    img: "/services/web1.webp",
   },
   {
     title: "App Development",
     desc: "Modern mobile & web apps with intuitive UX and smooth performance.",
-    img: "/services/app2.png",
+    img: "/services/app2.webp",
   },
   {
     title: "UI / UX Design",
     desc: "Design systems and experiences users actually enjoy using.",
-    img: "/services/cyber1.png",
+    img: "/services/cyber1.webp",
   },
   {
     title: "SEO Optimization",
     desc: "Rank higher, attract the right traffic, and grow organically.",
-    img: "/services/seo1.png",
+    img: "/services/seo1.webp",
   },
   {
     title: "Digital Marketing",
     desc: "Data-driven marketing strategies that convert and scale.",
-    img: "/services/marketing1.png",
+    img: "/services/marketing1.webp",
   },
   {
     title: "Cloud Solutions",
     desc: "Secure, scalable cloud infrastructure built for growth.",
-    img: "/services/cloud1.png",
+    img: "/services/cloud1.webp",
   },
 ]
 

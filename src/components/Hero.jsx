@@ -17,7 +17,7 @@ const services = [
     name: "Web Development",
     subtitle: "Enterprise SaaS & web platforms",
     icon: Globe,
-    image: "/services/webd.png",
+    image: "/services/webd.webp",
     features: [
       "Scalable SaaS architecture",
       "High-performance APIs",
@@ -33,7 +33,7 @@ const services = [
     name: "Application Development",
     subtitle: "Custom business software",
     icon: AppWindow,
-    image: "/services/appd.png",
+    image: "/services/appd.webp",
     features: [
       "CRM & ERP systems",
       "Automation dashboards",
@@ -49,7 +49,7 @@ const services = [
     name: "iOS Development",
     subtitle: "App Store ready apps",
     icon: Smartphone,
-    image: "/services/iosd.png",
+    image: "/services/iosd.webp",
     features: [
       "Swift native apps",
       "App Store deployment",
@@ -65,7 +65,7 @@ const services = [
     name: "Cloud Systems",
     subtitle: "Infra & DevOps automation",
     icon: Cloud,
-    image: "/services/cloudd.png",
+    image: "/services/cloudd.webp",
     features: [
       "Auto-scaling servers",
       "CI/CD pipelines",
