@@ -1,13 +1,108 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- ================= META BASICS ================= -->
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>my-company-site</title>
+
+    <!-- ================= TITLE ================= -->
+    <title>
+      SYTEOS Labs LLP — Website Development & SaaS Solutions Company in Pune
+    </title>
+
+    <!-- ================= SEO META ================= -->
+    <meta
+      name="description"
+      content="SYTEOS Labs LLP is a Pune-based software company specializing in website development, SaaS platforms, mobile apps, cloud systems, and scalable digital solutions for modern businesses."
+    />
+
+    <meta
+      name="keywords"
+      content="
+        Website Development Company in Pune,
+        SaaS Development Company India,
+        Mobile App Development Pune,
+        Cloud Solutions Company,
+        Software Development Company Pune,
+        Web Design & Development India,
+        Startup Tech Partner India
+      "
+    />
+    <meta name="google-site-verification" content="R2GU6mSLfB_UFdS7qM_awGOsGKoogZrreUm2ZKUWjWE" />
+
+    <meta name="author" content="SYTEOS Labs LLP" />
+    <link rel="canonical" href="https://syteoslabs.com/" />
+
+    <!-- ================= FAVICON ================= -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <!-- ================= OPEN GRAPH (FACEBOOK / LINKEDIN) ================= -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://syteoslabs.com/" />
+    <meta
+      property="og:title"
+      content="SYTEOS Labs LLP — Website & SaaS Development Company"
+    />
+    <meta
+      property="og:description"
+      content="We build scalable websites, SaaS platforms, and mobile apps for startups and enterprises worldwide."
+    />
+    <meta property="og:image" content="https://syteoslabs.com/og-image.png" />
+
+    <!-- ================= TWITTER SEO ================= -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="SYTEOS Labs LLP — Website Development Company"
+    />
+    <meta
+      name="twitter:description"
+      content="Pune-based experts in website development, SaaS platforms, and mobile apps."
+    />
+    <meta
+      name="twitter:image"
+      content="https://syteoslabs.com/og-image.png"
+    />
+
+    <!-- ================= LOCAL BUSINESS SCHEMA ================= -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "SYTEOS Labs LLP",
+        "url": "https://syteoslabs.com/",
+        "logo": "https://syteoslabs.com/logo.png",
+
+        "description":
+          "SYTEOS Labs LLP is a Pune-based software company specializing in website development, SaaS platforms, mobile apps, and cloud solutions.",
+
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Pune",
+          "addressRegion": "Maharashtra",
+          "addressCountry": "India"
+        },
+
+        "sameAs": [
+          "https://www.linkedin.com/",
+          "https://www.instagram.com/",
+          "https://twitter.com/"
+        ],
+
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "availableLanguage": ["English"]
+        }
+      }
+    </script>
   </head>
+
+  <!-- ================= BODY ================= -->
   <body>
     <div id="root"></div>
+
+    <!-- React / Vite Entry -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

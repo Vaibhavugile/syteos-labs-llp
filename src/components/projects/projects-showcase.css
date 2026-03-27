@@ -1,91 +1,134 @@
-/* ======================================= */
-/* PROJECTS SHOWCASE — AUTO SLIDER */
-/* ======================================= */
+/* =======================================
+   PROJECTS SHOWCASE — YC PREMIUM
+======================================= */
 
-.projects-showcase {
-  width: 100%;
-  background: #031027;
-  padding: 120px 6vw;
-  
-}
 .projects-showcase {
   position: relative;
-  isolation: isolate; /* 🔑 CRITICAL */
-  z-index: 1;
-  overflow-x: hidden; /* ONLY X axis */
+  isolation: isolate;
+  overflow-x: hidden;
+
+  /* 🔥 Compact padding */
+  padding: 40px 6vw 40px;
+
+  background:
+    radial-gradient(
+      900px circle at 50% -20%,
+      rgba(108,92,231,.18),
+      transparent 60%
+    ),
+    linear-gradient(180deg,#020617 0%,#020617 100%);
 }
 
-/* HEADER */
+/* SECTION BLEND */
+
+.projects-showcase::before {
+  content: "";
+  position: absolute;
+  top: -90px;
+  left: 0;
+  right: 0;
+  height: 90px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(2,6,23,0) 0%,
+    rgba(2,6,23,.55) 60%,
+    rgba(2,6,23,1) 100%
+  );
+}
+
+/* =======================================
+   HEADER
+======================================= */
+
 .projects-header {
-  max-width: 680px;
-  margin: 0 auto 60px; /* 🔥 center horizontally */
-  text-align: center; /* 🔥 center text */
+  max-width: 720px;
+  margin: 0 auto 70px;
+  text-align: center;
 }
 
 .projects-header h2 {
-  font-size: clamp(2.6rem, 4vw, 3.4rem);
+  font-size: clamp(2.4rem,4vw,3rem);
   font-weight: 800;
-  margin-bottom: 14px;
+  color: #fff;
 }
 
-.projects-header h2 span {
-  background: linear-gradient(90deg, #6c5ce7, #00d4ff);
+.projects-header span {
+  background: linear-gradient(90deg,#6c5ce7,#00d4ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .projects-header p {
-  font-size: 1.05rem;
-  color: #9aa7bd;
+  margin-top: 12px;
+  color: rgba(255,255,255,.65);
 }
 
-/* SLIDER */
+/* =======================================
+   SLIDER
+======================================= */
+
 .projects-slider {
-  position: relative;
   width: 100%;
-  
-  overflow-x: hidden;
-
-
+  overflow: hidden;
 }
 
 /* TRACK */
+
 .projects-track {
   display: flex;
-  gap: 28px;
+  gap: 24px;
   width: max-content;
-  animation: slide 40s linear infinite;
+  animation: slide 42s linear infinite;
 }
 
-/* Pause on hover */
 .projects-slider:hover .projects-track {
   animation-play-state: paused;
 }
 
-/* CARD BASE */
+/* =======================================
+   CARDS
+======================================= */
+
 .project-card {
   position: relative;
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
   overflow: hidden;
   flex-shrink: 0;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+
+  box-shadow: 0 20px 50px rgba(0,0,0,.45);
+
+  transition: .4s cubic-bezier(.16,.84,.44,1);
 }
 
-/* WEB CARD */
+/* Web */
+
 .project-card.web {
-  width: 420px;
-  height: 260px;
+  width: 400px;
+  height: 250px;
 }
 
-/* APP CARD */
+/* App */
+
 .project-card.app {
-  width: 220px;
-  height: 420px;
+  width: 210px;
+  height: 400px;
 }
 
-/* MEDIA */
+/* Hover lift */
+
+.project-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 40px 90px rgba(0,0,0,.8);
+}
+
+/* =======================================
+   MEDIA
+======================================= */
+
 .project-media img,
 .project-media video {
   width: 100%;
@@ -93,42 +136,64 @@
   object-fit: cover;
 }
 
-/* TITLE */
+/* Glow overlay */
+
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+
+  background:
+    radial-gradient(
+      400px circle at 0% 0%,
+      rgba(108,92,231,.25),
+      transparent 65%
+    );
+
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+
+.project-card:hover::after {
+  opacity: 1;
+}
+
+/* =======================================
+   TITLE
+======================================= */
+
 .project-title {
   position: absolute;
   left: 14px;
   bottom: 14px;
-  font-size: 0.85rem;
+
+  font-size: .82rem;
   font-weight: 600;
   color: #eaf2ff;
-  background: rgba(0, 0, 0, 0.55);
+
+  background: rgba(0,0,0,.55);
   padding: 6px 10px;
   border-radius: 8px;
   backdrop-filter: blur(6px);
 }
 
-/* ANIMATION */
+/* =======================================
+   SLIDE ANIMATION
+======================================= */
+
 @keyframes slide {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
-/* --------------------------------------- */
-/* MOBILE */
-/* --------------------------------------- */
+/* =======================================
+   MOBILE
+======================================= */
 
 @media (max-width: 768px) {
-  .projects-showcase {
-    padding: 90px 1.25rem;
-  }
 
-  .projects-header {
-    text-align: center;
-    margin-bottom: 40px;
+  .projects-showcase {
+    padding: 70px 6vw 90px;
   }
 
   .project-card.web {
@@ -137,7 +202,7 @@
   }
 
   .project-card.app {
-    width: 180px;
-    height: 340px;
+    width: 170px;
+    height: 320px;
   }
 }

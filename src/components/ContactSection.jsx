@@ -7,7 +7,7 @@ import "./contact.css"
 
 export default function ContactUs() {
   const [sending, setSending] = useState(false)
-  const [status, setStatus] = useState(null) // "success" | "error"
+  const [status, setStatus] = useState(null)
 
   const sendEmail = (e) => {
     e.preventDefault()
@@ -29,8 +29,7 @@ export default function ContactUs() {
           setSending(false)
           e.target.reset()
         },
-        (error) => {
-          console.error(error)
+        () => {
           setStatus("error")
           setSending(false)
         }
@@ -41,50 +40,24 @@ export default function ContactUs() {
     <section className="contact" id="contact">
       <div className="contact-wrapper">
 
-        {/* ================= HEADER ================= */}
-        <header className="contact-header">
+        {/* HEADER */}
+        <motion.header
+          className="contact-header"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <h2>
+            Let’s <span>Talk</span>
+          </h2>
+          <p>Have a project in mind? We usually respond within 24 hours.</p>
+        </motion.header>
 
-          {/* DESKTOP HEADER */}
-          <motion.div
-            className="contact-header-desktop"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2>
-              Let’s <span>Talk</span>
-            </h2>
-            <p>Have a project in mind? We usually respond within 24 hours.</p>
-          </motion.div>
-
-          {/* MOBILE HEADER */}
-          <div className="contact-header-mobile">
-            <h2>
-              Let’s <span>Talk</span>
-            </h2>
-
-            <div className="mobile-avatar">
-              <Canvas camera={{ position: [0, 1.3, 4.8], fov: 32 }}>
-                <ambientLight intensity={0.7} />
-                <directionalLight position={[5, 5, 5]} intensity={1.2} />
-                <Suspense fallback={null}>
-                  <AvatarCall />
-                </Suspense>
-              </Canvas>
-            </div>
-
-            <p className="contact-subtitle">
-              Have a project in mind? We usually respond within 24 hours.
-            </p>
-          </div>
-
-        </header>
-
-        {/* ================= CONTENT ================= */}
+        {/* CONTENT */}
         <div className="contact-layout">
 
-          {/* DESKTOP AVATAR */}
+          {/* AVATAR */}
           <div className="contact-avatar">
             <Canvas camera={{ position: [0, 1.4, 4.6], fov: 28 }}>
               <ambientLight intensity={0.7} />
@@ -109,25 +82,9 @@ export default function ContactUs() {
               <p>Your information stays private.</p>
             </div>
 
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              required
-            />
-
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              required
-            />
-
-            <textarea
-              name="message"
-              placeholder="Tell us about your project"
-              required
-            />
+            <input name="name" placeholder="Your Name" required />
+            <input name="email" type="email" placeholder="Email Address" required />
+            <textarea name="message" placeholder="Tell us about your project" required />
 
             <button type="submit" disabled={sending}>
               {sending ? "Sending..." : "Send Message"}
@@ -138,16 +95,14 @@ export default function ContactUs() {
             )}
 
             {status === "error" && (
-              <p className="contact-error">❌ Failed to send message. Try again.</p>
+              <p className="contact-error">❌ Failed to send message.</p>
             )}
 
             <p className="contact-trust">🔒 We never share your data</p>
           </motion.form>
 
         </div>
-
       </div>
     </section>
   )
 }
-
