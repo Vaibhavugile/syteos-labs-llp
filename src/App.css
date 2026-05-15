@@ -508,3 +508,112 @@
     font-size: 0.85rem;
   }
 }
+/* =========================================
+   SMALL MOBILE FIXES
+========================================= */
+
+@media (max-width: 600px) {
+
+  .hero-inner {
+    padding: 0 1rem;
+    gap: 2rem;
+  }
+
+  .hero-text h1 {
+    font-size: 2rem;
+    line-height: 1.15;
+  }
+
+  .hero-text p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  .floating-frame {
+    height: auto;
+    min-height: 520px;
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  /* STACK SIDEBAR + CONTENT */
+
+  .dash-body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+
+    padding: 12px;
+  }
+
+  .sidebar span {
+    justify-content: center;
+    font-size: 0.7rem;
+    text-align: center;
+    padding: 10px 6px;
+  }
+
+  .service-panel {
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .service-header h3 {
+    font-size: 1rem;
+  }
+
+  .service-header p {
+    font-size: 0.78rem;
+  }
+
+  .feature {
+    font-size: 0.78rem;
+    align-items: flex-start;
+  }
+
+  /* METRICS MOBILE */
+
+  .metric-strip {
+    gap: 8px;
+  }
+
+  .metric-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+
+    padding: 10px;
+  }
+
+  .metric-item strong {
+    font-size: 0.82rem;
+  }
+
+  /* IMAGE SIDE */
+
+  .service-image {
+    width: 92%;
+    height: auto;
+  }
+
+  /* BUTTONS FULL WIDTH */
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-main,
+  .btn-ghost {
+    width: 100%;
+    text-align: center;
+  }
+}

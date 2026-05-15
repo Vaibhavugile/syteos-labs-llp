@@ -220,20 +220,31 @@
 @media (max-width: 600px) {
 
   .services {
-    padding: 70px 6vw 90px;
+    padding: 70px 5vw 90px;
   }
 
   .services-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
   }
 
   .service-card {
-    height: 250px;
-    border-radius: 22px;
+    height: 210px;
+    border-radius: 18px;
     background-position: center 30%;
   }
 
   .service-content {
-    padding: 20px 20px 18px;
+    padding: 16px;
+  }
+
+  .service-card h3 {
+    font-size: 0.95rem;
+  }
+
+  .service-card p {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    margin-top: 4px;
   }
 }

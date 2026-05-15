@@ -72,15 +72,7 @@ export default function App() {
       </section>
 
       {/* ================= TESTIMONIALS ================= */}
-      <section className="section-shell section">
-        <Testimonials />
-      </section>
-
-      {/* ================= TEAM ================= */}
-      <section className="section-shell section">
-        <TeamSection />
-      </section>
-
+     
       {/* ================= CONTACT ================= */}
       <ContactUs />
 

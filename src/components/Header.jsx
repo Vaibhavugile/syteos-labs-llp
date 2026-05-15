@@ -22,8 +22,6 @@ export default function Header() {
             <a href="#services">Services</a>
             <a href="#process">Process</a>
             <a href="#projects">Projects</a>
-            <a href="#testimonials">Testimonials</a>
-            <a href="#team">Team</a>
 
             {/* CTA → CONTACT */}
             <a href="#contact" className="cta">
@@ -58,8 +56,6 @@ export default function Header() {
             <a href="#services" onClick={closeMenu}>Services</a>
             <a href="#process" onClick={closeMenu}>Process</a>
             <a href="#projects" onClick={closeMenu}>Projects</a>
-            <a href="#testimonials" onClick={closeMenu}>Testimonials</a>
-            <a href="#team" onClick={closeMenu}>Team</a>
 
             {/* CTA */}
             <a

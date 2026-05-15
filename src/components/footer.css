@@ -7,13 +7,20 @@
 .footer-inner {
   max-width: 1200px;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  gap: 40px;
+
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+
+  gap: 60px;
+  align-items: start;
+}
+.footer-left {
+  flex: 1;
+  min-width: 260px;
 }
 
 .footer-logo {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 800;
   color: white;
 }
@@ -25,43 +32,131 @@
 }
 
 .footer-left p {
-  margin-top: 10px;
+  margin-top: 12px;
   color: #9aa7bd;
-  max-width: 320px;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.footer-contact {
+  margin-top: 24px;
+}
+
+.footer-contact p {
+  margin-bottom: 16px;
+}
+
+.footer-contact strong {
+  color: white;
 }
 
 .footer-nav {
   display: flex;
-  gap: 22px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 140px;
 }
 
 .footer-nav a {
   color: #eaf2ff;
   opacity: 0.8;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  transition: 0.3s;
 }
 
 .footer-nav a:hover {
   opacity: 1;
+  transform: translateX(4px);
+}
+
+.footer-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 160px;
+}
+
+.footer-socials h4 {
+  color: white;
+  margin-bottom: 8px;
+}
+
+.footer-socials a {
+  color: #9aa7bd;
+  font-size: 0.95rem;
+  transition: 0.3s;
+}
+
+.footer-socials a:hover {
+  color: white;
 }
 
 .footer-bottom {
-  margin-top: 40px;
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.08);
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: #7f8aa3;
 }
 
 @media (max-width: 768px) {
+
+  .footer {
+    padding: 50px 24px 24px;
+  }
+
   .footer-inner {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  .footer-left {
+    min-width: unset;
+  }
+
+  .footer-logo {
+    font-size: 1rem;
+  }
+
+  .footer-left p,
+  .footer-contact p,
+  .footer-nav a,
+  .footer-socials a {
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .footer-contact {
+    margin-top: 14px;
   }
 
   .footer-nav {
-    justify-content: center;
+    gap: 10px;
+  }
+
+  .footer-socials {
+    gap: 10px;
+  }
+
+  .footer-socials h4 {
+    font-size: 0.9rem;
+  }
+
+  .footer-bottom {
+    margin-top: 35px;
+    text-align: center;
+    font-size: 0.72rem;
+  }
+}
+@media (max-width: 520px) {
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .footer-bottom {
+    text-align: left;
   }
 }
